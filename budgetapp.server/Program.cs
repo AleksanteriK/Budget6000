@@ -2,6 +2,8 @@ using System;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using BudgetappServer.Models;
+using BudgetappServer.Services;
 
 namespace budgetapp.server;
 
@@ -9,11 +11,36 @@ public partial class Program
 {
     public static void Main(string[] args)
     {
-        var builder = WebApplication.CreateBuilder(args);
-        
-        builder.Services.AddControllers();
+        //hakee envifilun
+        DotNetEnv.Env.TraversePath().Load();
 
-        var app = builder.Build();
+        var connectionString = System.Environment.GetEnvironmentVariable("MONGODB_CONNECTION_STRING");
+        var JWT_secretKey = System.Environment.GetEnvironmentVariable("JWT_SECRET_KEY");
+
+        if (string.IsNullOrEmpty(connectionString))
+        {
+            throw new Exception("Connection string not found.");
+        }
+
+        if (string.IsNullOrEmpty(JWT_secretKey))
+        {
+            throw new Exception("Secret key for JWT not found.");
+        }
+
+        var builder = WebApplication.CreateBuilder(args);
+
+        builder.Configuration.AddInMemoryCollection(new Dictionary<string, string>
+        {
+            {"BudgetappDatabase:ConnectionString", connectionString }
+        });
+
+        builder.Services.Configure<BudgetAppDatabaseSettings>
+        (
+            builder.Configuration.GetSection("BudgetappDatabase")
+        );
+
+        builder.Services.AddSingleton<Userservice>();
+        builder.Services.AddControllers();
 
         var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 
@@ -28,6 +55,29 @@ public partial class Program
                 });
         });
 
+        builder.Services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+            .AddJwtBearer(options =>
+            {
+                //sallii http jos on development ympäristössä, muutoin https
+                options.RequireHttpsMetadata = !builder.Environment.IsDevelopment();
+                options.SaveToken = true;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = builder.Configuration["JwtSettings:Issuer"],
+                    ValidAudience = builder.Configuration["JwtSettings:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JWT_secretKey))
+                };
+            });
+
+        var app = builder.Build();
 
         if (builder.Environment.IsDevelopment())
         {
