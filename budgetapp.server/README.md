@@ -11,6 +11,14 @@
 
 -Microsoft.IdentityModel.Tokens
 
+-System.IdentityModel.Tokens.Jwt
+
+-BCrypt.Net-Next
+
+-DotNetEnv
+
+-Microsoft.AspNetCore.Authentication.JwtBearer
+
 ## Aja seuraavat komennot cmd / pwrshell
 
 ```console
