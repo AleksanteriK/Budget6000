@@ -40,6 +40,15 @@ dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer --version 8.0.0
 
 ```
 
+### .env
+
+Tarviit myös .env tiedoston, jossa on database connection string ja JWT token secret key
+
+Pitää olla muotoa:
+
+MONGODB_CONNECTION_STRING=< connection string >
+JWT_SECRET_KEY=< secret key >
+
 ### Servu kuuntelee porttia 5000 lokaalisti
 
 ```console
