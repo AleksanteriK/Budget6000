@@ -47,6 +47,7 @@ Tarviit myös .env tiedoston, jossa on database connection string ja JWT token s
 Pitää olla muotoa:
 
 MONGODB_CONNECTION_STRING=< connection string >
+
 JWT_SECRET_KEY=< secret key >
 
 ### Servu kuuntelee porttia 5000 lokaalisti
