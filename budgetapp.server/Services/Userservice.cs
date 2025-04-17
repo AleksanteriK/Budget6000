@@ -16,11 +16,26 @@ public class Userservice
         _userCollection = _database.GetCollection<User>(settings.Value.UserCollectionName);
     }
 
+    public async Task<List<User>> GetUsersAsync() =>
+        await _userCollection.Find(_ => true).ToListAsync();
+
+    public async Task PostUserAsync(User newUser)
+    {
+        await _userCollection.InsertOneAsync(newUser);
+    }
+
     //voi löytää käyttäjän myös sähköpostilla jos username on payloadissa säpo
     public async Task<User?> GetUserByUserNameAsync(string username)
     {
         User user = await _userCollection.Find(user => user.Username == username).FirstOrDefaultAsync();
         user ??= await _userCollection.Find(user => user.Email.ToLower() == username.ToLower()).FirstOrDefaultAsync();
+
+        return user;
+    }
+
+    public async Task<User?> GetUserByIdAuthAsync(string userId)
+    {
+        User user = await _userCollection.Find(user => user.Id == userId).FirstOrDefaultAsync();
 
         return user;
     }

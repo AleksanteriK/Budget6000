@@ -4,5 +4,32 @@ POST http://localhost:5000/api/user/login
 content-type: application/json
 {
 	"username": "testuser",
-	"password": "test1"
+	"password": "test"
+}
+
+###
+
+GET http://localhost:5000/api/user/myinformation
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjY3ZjhlYzJmMDE2MzA0ZTJiOTNjOGY2MyIsImV4cCI6MTc0NDg4NzkxNiwiaXNzIjoiQnVkZ2V0YXBwIiwiYXVkIjoiQnVkZ2V0YXBwVXNlcnMifQ.C3uzZT6zKbpkKkR5_Iyz6YMtp14do1kwn8jKLFDiQb0
+
+###
+
+POST http://localhost:5000/api/user/new
+content-type: application/json
+{
+	"Username": "testuser3",
+	"Firstname": "test2",
+	"Lastname": "user2",
+	"Password": "test2",
+	"Salary": 5000,
+	"HousingAllowance": 1500,
+	"StudyAllowance": 300,
+	"OtherIncome": [100, 200],
+	"Rent": 800,
+	"Mortage": 1200,
+	"ElectricityBill": 100,
+	"Food": 300,
+	"OtherExpenses": [50, 100],
+	"Phone": "123-456-7890"
 }
