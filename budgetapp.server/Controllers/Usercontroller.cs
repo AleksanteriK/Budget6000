@@ -126,15 +126,15 @@ public class Usercontroller : ControllerBase
             Lastname = newUserDto.Lastname,
             Password = hashedPassword,
             Email = newUserDto.Email,
-            Salary = (int)newUserDto.Salary,
-            HousingAllowance = (int)newUserDto.HousingAllowance,
+            Salary = (double)newUserDto.Salary,
+            HousingAllowance = (double)newUserDto.HousingAllowance,
             StudyAllowance = (double)newUserDto.StudyAllowance,
-            OtherIncome = newUserDto.OtherIncome ?? new List<int>(),  // Default to empty list if null
-            Rent = (int)newUserDto.Rent,
-            Mortage = (int)newUserDto.Mortage,
-            ElectricityBill = (int)newUserDto.ElectricityBill,
-            Food = (int)newUserDto.Food,
-            OtherExpenses = newUserDto.OtherExpenses ?? new List<int>(),  // Default to empty list if null
+            OtherIncome = newUserDto.OtherIncome ?? new List<double>(),
+            Rent = (double)newUserDto.Rent,
+            Mortage = (double)newUserDto.Mortage,
+            ElectricityBill = (double)newUserDto.ElectricityBill,
+            Food = (double)newUserDto.Food,
+            OtherExpenses = newUserDto.OtherExpenses ?? new List<double>(),
             Phone = newUserDto.Phone
         };
 

@@ -22,31 +22,31 @@ public class User
     public string Password { get; set; }
 
     [BsonElement("salary")]
-    public int Salary { get; set; }
+    public double Salary { get; set; }
 
     [BsonElement("housing_allowance")]
-    public int HousingAllowance { get; set; }
+    public double HousingAllowance { get; set; }
 
     [BsonElement("study_allowance")]
     public double StudyAllowance { get; set; }
 
     [BsonElement("other_income")]
-    public List<int> OtherIncome { get; set; }
+    public List<double> OtherIncome { get; set; }
 
     [BsonElement("rent")]
-    public int Rent { get; set; }
+    public double Rent { get; set; }
 
     [BsonElement("mortage")]
-    public int Mortage { get; set; }
+    public double Mortage { get; set; }
 
     [BsonElement("electricity_bill")]
-    public int ElectricityBill { get; set; }
+    public double ElectricityBill { get; set; }
 
     [BsonElement("food")]
-    public int Food { get; set; }
+    public double Food { get; set; }
 
     [BsonElement("other_expenses")]
-    public List<int> OtherExpenses { get; set; }
+    public List<double> OtherExpenses { get; set; }
 
     [BsonElement("email")]
     public string Email { get; set; }
