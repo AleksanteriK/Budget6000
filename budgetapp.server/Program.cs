@@ -49,7 +49,7 @@ public partial class Program
             options.AddPolicy(name: MyAllowSpecificOrigins,
                 policy =>
                 {
-                    policy.WithOrigins("http://localhost:3000")
+                    policy.WithOrigins("http://localhost:5173")
                         .AllowAnyMethod()
                         .AllowAnyHeader();
                 });
@@ -62,7 +62,7 @@ public partial class Program
         })
             .AddJwtBearer(options =>
             {
-                //sallii http jos on development ympäristössä, muutoin https
+                //sallii http jos on development ympï¿½ristï¿½ssï¿½, muutoin https
                 options.RequireHttpsMetadata = !builder.Environment.IsDevelopment();
                 options.SaveToken = true;
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -86,7 +86,7 @@ public partial class Program
 
         else
         {
-            //vaatii https production ympristössä
+            //vaatii https production ympristï¿½ssï¿½
             app.UseHttpsRedirection();
         }
 

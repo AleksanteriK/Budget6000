@@ -1,45 +1,86 @@
 import './App.css'
 import { NavLink } from "react-router";
-import { useState } from "react";
 import { useAuth } from './AuthContext';
+import { Formik, Field, Form } from 'formik';
+import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from "react-router";
 
 function Login() {
-
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
   const { setToken } = useAuth();
+  let navigate = useNavigate();
 
-  const handleLogin = (e) => {
-    e.preventDefault()
-    console.log('Logging in with:', username, password)
-    // Here you'd usually send data to your backend
+  const handleLogin = (values: { username: any; password: any; }) => {
+    const username = values.username;
+    const password = values.password;
+
+    if(!username || !password)
+    {
+      toast.error("Anna käyttäjätunnus ja salasana!");
+      return;
+    }
+
+    const details = {
+        username: username,
+        password: password
+      };
+    
+    const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(details)
+      };
+      fetch('http://localhost:5000/api/user/login', options)
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+
+            // Check if login was successful
+            if(data.token !== undefined)
+            {
+                toast.success("Kirjauduttu sisään!");
+                setToken(data.token);
+                navigate("/");
+                return;
+            }
+
+            toast.error("Väärä käyttäjätunnus tai salasana!");
+        })
+        .catch(() => {
+            // 401 -> Väärä käyttäjätunnus tai salasana
+            toast.error("Väärä käyttäjätunnus tai salasana!");
+        });
   }
 
   return (
     <>
+      <div><Toaster/></div>
       <p>Moro tää on login, en oo hyvä tekee designei</p>
-      <p>Nää voi tehä myös jollai formi libraryllä, esim joskus käytin Formik. TÄÄ VAAN TESTINÄ!!</p>
 
-      <div>
-        <form onSubmit={handleLogin}>
-          <h2>Kirjaudu sisään</h2>
-          <input
-            type="text"
+      <Formik
+      initialValues={{ username: '', password: '' }}
+      onSubmit={handleLogin}
+      >
+        <Form>
+          <label htmlFor="username">Username:</label>
+          <Field
+            id="username"
+            name="username"
             placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
           />
-          <input
+
+          <label htmlFor="password">Password:</label>
+          <Field
+            id="password"
+            name="password"
+            placeholder="password"
             type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
           />
+
           <button type="submit">Kirjaudu sisään</button>
-        </form>
-      </div>
+        </Form>
+      </Formik>
 
       <NavLink to="/">Takaisin</NavLink>
     </>
