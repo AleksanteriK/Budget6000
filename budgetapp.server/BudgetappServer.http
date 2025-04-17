@@ -3,33 +3,48 @@
 POST http://localhost:5000/api/user/login
 content-type: application/json
 {
-	"username": "testuser",
-	"password": "test"
+	"username": "testuser2",
+	"password": "test2"
 }
 
 ###
 
 GET http://localhost:5000/api/user/myinformation
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjY3ZjhlYzJmMDE2MzA0ZTJiOTNjOGY2MyIsImV4cCI6MTc0NDg4NzkxNiwiaXNzIjoiQnVkZ2V0YXBwIiwiYXVkIjoiQnVkZ2V0YXBwVXNlcnMifQ.C3uzZT6zKbpkKkR5_Iyz6YMtp14do1kwn8jKLFDiQb0
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjY3ZjhlYzJmMDE2MzA0ZTJiOTNjOGY2MyIsImV4cCI6MTc0NDkyNTk4NywiaXNzIjoiQnVkZ2V0YXBwIiwiYXVkIjoiQnVkZ2V0YXBwVXNlcnMifQ.SbUogc_4tKX6poIbh8plb-9SHtQ-NT0GZ2Pj8HswomI
 ###
 
 POST http://localhost:5000/api/user/new
 content-type: application/json
 {
-	"Username": "testuser3",
+	"Username": "testuser2",
 	"Firstname": "test2",
 	"Lastname": "user2",
 	"Password": "test2",
 	"Salary": 5000,
 	"HousingAllowance": 1500,
 	"StudyAllowance": 300,
-	"OtherIncome": [100, 200],
+	"OtherIncome": [50],
 	"Rent": 800,
 	"Mortage": 1200,
 	"ElectricityBill": 100,
 	"Food": 300,
 	"OtherExpenses": [50, 100],
+	"Email": "e@e.com",
 	"Phone": "123-456-7890"
 }
+
+###
+
+PATCH http://localhost:5000/api/user/myinformation
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjY3ZjhlYzJmMDE2MzA0ZTJiOTNjOGY2MyIsImV4cCI6MTc0NDkzMzY3NCwiaXNzIjoiQnVkZ2V0YXBwIiwiYXVkIjoiQnVkZ2V0YXBwVXNlcnMifQ.AId2URB2-TuhmqOuiVrIH174jJKy6b45LM5Dq7UQ5PQ
+{
+	"Firstname": "test",
+	"Lastname": "user"
+}
+
+###
+DELETE http://localhost:5000/api/user/myinformation
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjY4MDE4N2Q3YTc1MDQ5MTRmNTIwZjA5ZiIsImV4cCI6MTc0NDkzNDQwNywiaXNzIjoiQnVkZ2V0YXBwIiwiYXVkIjoiQnVkZ2V0YXBwVXNlcnMifQ.qhDBIdwniMTuzfqt38mt7wygSpEfUVq9QSrFJOIbGRs

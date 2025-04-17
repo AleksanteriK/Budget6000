@@ -26,10 +26,77 @@ public class Usercontroller : ControllerBase
         _configuration = configuration;
     }
 
+    [Authorize]
+    [HttpGet("myinformation")]
+    public async Task<ActionResult<User>> GetMyData()
+    {
+        var userIdInToken = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        if (string.IsNullOrEmpty(userIdInToken))
+        {
+            return Unauthorized("Bad token");
+        }
+
+        var myData = await _userService.GetUserByIdAuthAsync(userIdInToken);
+
+        if (myData == null)
+        {
+            return NotFound("No data available");
+        }
+
+        return Ok(myData);
+    }
+
+    [Authorize]
+    [HttpPatch("myinformation")]
+    public async Task<ActionResult> UpdateData([FromBody] UpdateUserDto updatedData)
+    {
+        var userIdInToken = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        if (string.IsNullOrEmpty(userIdInToken))
+        {
+            return Unauthorized("Bad token");
+        }
+
+        if (updatedData == null)
+        {
+            return BadRequest("No data was found");
+        }
+
+        var userData = await _userService.GetUserByIdAuthAsync(userIdInToken);
+
+        if (userData == null)
+        {
+            return NotFound("No data available");
+        }
+
+        var properties = typeof(UpdateUserDto).GetProperties();
+
+        //muutetaan haluttu data
+        foreach (var property in properties)
+        {
+            var newValue = property.GetValue(updatedData);
+
+            if (newValue != null)
+            {
+                var modifiedProperty = typeof(User).GetProperty(property.Name);
+                
+                if (modifiedProperty != null && modifiedProperty.CanWrite)
+                {
+                    modifiedProperty.SetValue(userData, newValue);
+                }
+            }
+        }
+
+        await _userService.UpdateUserDataAsync(userIdInToken, userData);
+
+        return Ok();
+    }
+
     [HttpPost("new")]
     public async Task<ActionResult> CreateUser([FromBody] CreateUserDto newUserDto)
     {
-        var users = await _userService.GetUsersAsync();
+        var users = await _userService.GetUserDataAsync();
 
         //tarkistetaan, ettei luo uutta käyttäjää nimellä säpolla tai numerolla joka on jo olemassa
         foreach (var user in users)
@@ -76,27 +143,6 @@ public class Usercontroller : ControllerBase
         return CreatedAtAction(nameof(GetMyData), new { id = newUser.Id }, newUser.Username);
     }
 
-    [Authorize]
-    [HttpGet("myinformation")]
-    public async Task<ActionResult<User>> GetMyData()
-    {
-        var userIdInToken = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-        if (string.IsNullOrEmpty(userIdInToken))
-        {
-            return Unauthorized("Bad token");
-        }
-
-        var myData = await _userService.GetUserByIdAuthAsync(userIdInToken);
-
-        if (myData == null)
-        {
-            return NotFound("No data available");
-        }
-
-        return Ok(myData);
-    }
-
     [HttpPost("login")]
     public async Task<ActionResult> Login([FromBody] LoginDto loginDto)
     {
@@ -130,6 +176,31 @@ public class Usercontroller : ControllerBase
         var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
         return Ok(new { Token = jwt });
+    }
+
+    [Authorize]
+    [HttpDelete("myinformation")]
+    public async Task<ActionResult> DeleteUser()
+    {
+        var userIdInToken = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var userIdString = userIdInToken.ToString();
+
+        if (string.IsNullOrEmpty(userIdInToken))
+        {
+            return Unauthorized("Bad token");
+        }
+
+        bool deletionSuccessful = await _userService.DeleteUserAsync(userIdString);
+
+        if (deletionSuccessful == true)
+        {
+            return NoContent();
+        }
+        
+        else
+        {
+            return StatusCode(500, "Something went wrong on the server side, could not delete any data");
+        }
     }
 }
 

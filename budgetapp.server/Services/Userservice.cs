@@ -16,12 +16,21 @@ public class Userservice
         _userCollection = _database.GetCollection<User>(settings.Value.UserCollectionName);
     }
 
-    public async Task<List<User>> GetUsersAsync() =>
+    public async Task<List<User>> GetUserDataAsync() =>
         await _userCollection.Find(_ => true).ToListAsync();
 
-    public async Task PostUserAsync(User newUser)
-    {
+    public async Task PostUserAsync(User newUser) =>
         await _userCollection.InsertOneAsync(newUser);
+    
+
+    public async Task UpdateUserDataAsync(string id, User modifiedUser) =>
+        await _userCollection.ReplaceOneAsync(user => user.Id == id, modifiedUser);
+
+    public async Task<bool> DeleteUserAsync(string userId)
+    {
+        var result = await _userCollection.DeleteOneAsync(user => user.Id == userId);
+
+        return result.DeletedCount > 0;
     }
 
     //voi löytää käyttäjän myös sähköpostilla jos username on payloadissa säpo
