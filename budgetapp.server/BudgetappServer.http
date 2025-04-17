@@ -3,8 +3,8 @@
 POST http://localhost:5000/api/user/login
 content-type: application/json
 {
-	"username": "testuser2",
-	"password": "test2"
+	"username": "testuser",
+	"password": "test"
 }
 
 ###
@@ -17,21 +17,21 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hc
 POST http://localhost:5000/api/user/new
 content-type: application/json
 {
-	"Username": "testuser2",
-	"Firstname": "test2",
-	"Lastname": "user2",
-	"Password": "test2",
-	"Salary": 5000,
-	"HousingAllowance": 1500,
+	"Username": "testuser",
+	"Firstname": "test",
+	"Lastname": "user",
+	"Password": "test",
+	"Salary": 3500,
+	"HousingAllowance": 1000,
 	"StudyAllowance": 300,
 	"OtherIncome": [50],
-	"Rent": 800,
-	"Mortage": 1200,
+	"Rent": 800.10,
+	"Mortage": 110.50,
 	"ElectricityBill": 100,
 	"Food": 300,
 	"OtherExpenses": [50, 100],
-	"Email": "e@e.com",
-	"Phone": "123-456-7890"
+	"Email": "user@test.com",
+	"Phone": "010"
 }
 
 ###
@@ -47,4 +47,4 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hc
 ###
 DELETE http://localhost:5000/api/user/myinformation
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjY4MDE4N2Q3YTc1MDQ5MTRmNTIwZjA5ZiIsImV4cCI6MTc0NDkzNDQwNywiaXNzIjoiQnVkZ2V0YXBwIiwiYXVkIjoiQnVkZ2V0YXBwVXNlcnMifQ.qhDBIdwniMTuzfqt38mt7wygSpEfUVq9QSrFJOIbGRs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjY3ZjhlYzJmMDE2MzA0ZTJiOTNjOGY2MyIsImV4cCI6MTc0NDkzNTYwNCwiaXNzIjoiQnVkZ2V0YXBwIiwiYXVkIjoiQnVkZ2V0YXBwVXNlcnMifQ.u0zHWgdnnIapUoS0uxtn1PUX3GFxHoPqgiiMThjBauQ

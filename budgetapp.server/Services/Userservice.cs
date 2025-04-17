@@ -22,7 +22,6 @@ public class Userservice
     public async Task PostUserAsync(User newUser) =>
         await _userCollection.InsertOneAsync(newUser);
     
-
     public async Task UpdateUserDataAsync(string id, User modifiedUser) =>
         await _userCollection.ReplaceOneAsync(user => user.Id == id, modifiedUser);
 
