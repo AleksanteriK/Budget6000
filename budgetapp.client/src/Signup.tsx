@@ -46,7 +46,7 @@ function Signup() {
             body: JSON.stringify(payload)
         };
 
-        const response = await fetch('http://localhost:5000/api/user/new', options);
+        const response = await fetch('https://budgetapi.tonitu.dev/api/user/new', options);
 
         if (response.status === 201) {
             toast.success("Käyttäjä luotu onnistuneesti!");
