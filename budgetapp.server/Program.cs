@@ -48,7 +48,7 @@ public partial class Program
             options.AddPolicy(name: MyAllowSpecificOrigins,
                 policy =>
                 {
-                    policy.WithOrigins("http://localhost:5173")
+                    policy.WithOrigins("https://budget.tonitu.dev")
                         .AllowAnyMethod()
                         .AllowAnyHeader();
                 });
