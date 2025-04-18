@@ -7,22 +7,24 @@ function App() {
 
   return (
     <>
-      <h1>Budget6000</h1>
-      <p>Pieniä testailuja</p>
+    <h1>Budget6000</h1>
+    <p>Pieniä testailuja</p>
 
-      <div>
-        {isLoggedIn ? <p>Token: {token}</p> : <p>Et ole kirjautunut sisään</p>}
-      </div>
-      
-      {isLoggedIn ?
+    <div>
+      {isLoggedIn ? <p>Token: {token}</p> : <p>Et ole kirjautunut sisään</p>}
+    </div>
+
+    {isLoggedIn ? (
       <NavLink to="logout">Kirjaudu ulos</NavLink>
-
-      :
-
-      <NavLink to="login">Kirjaudu</NavLink>}
-      
-    </>
-  )
+    ) : (
+      <>
+        <NavLink to="login">Kirjaudu</NavLink>
+        <br />
+        <NavLink to="signup">Luo käyttäjä</NavLink>
+      </>
+    )}
+  </>
+  );
 }
 
-export default App
+export default App;

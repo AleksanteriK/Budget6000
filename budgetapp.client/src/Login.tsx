@@ -62,7 +62,7 @@ function Login() {
       initialValues={{ username: '', password: '' }}
       onSubmit={handleLogin}
       >
-        <Form>
+        <Form className="form-group">
           <label htmlFor="username">Username:</label>
           <Field
             id="username"
