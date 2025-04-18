@@ -56,28 +56,28 @@ function Login() {
   return (
     <>
       <div><Toaster/></div>
-      <p>Moro tää on login, en oo hyvä tekee designei</p>
-
       <Formik
       initialValues={{ username: '', password: '' }}
       onSubmit={handleLogin}
       >
         <Form className="form-group">
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="username">Käyttäjätunnus</label>
           <Field
             id="username"
             name="username"
-            placeholder="Username"
+            placeholder="Käyttäjätunnus"
           />
-
-          <label htmlFor="password">Password:</label>
+          <br/>
+          <br/>
+          <label htmlFor="password">Salasana</label>
           <Field
             id="password"
             name="password"
-            placeholder="password"
+            placeholder="Salasana"
             type="password"
           />
-
+          <br/>
+          <br/>
           <button type="submit">Kirjaudu sisään</button>
         </Form>
       </Formik>
