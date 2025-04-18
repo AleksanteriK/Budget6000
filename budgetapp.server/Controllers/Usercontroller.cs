@@ -7,8 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 using BudgetappServer.Services;
 using BudgetappServer.Dtos;
 using BudgetappServer.Models;
-using BCrypt;
-using MongoDB.Bson;
 
 namespace BudgetappServer.Controllers;
 

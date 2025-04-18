@@ -3,7 +3,7 @@ import { useAuth } from './AuthContext';
 import { NavLink } from "react-router";
 
 function App() {
-  const { token, isLoggedIn, setToken } = useAuth();
+  const { token, isLoggedIn } = useAuth();
 
   return (
     <>
