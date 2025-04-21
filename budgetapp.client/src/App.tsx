@@ -12,7 +12,7 @@ function App() {
 
     <div>
       {isLoggedIn && user ? (
-        <h2>Hyvää päivää, {user.firstname}!</h2>
+        <h2>Hyvää päivää, {user.firstname} {user.lastname}!</h2>
       ) : (
         <p>Et ole kirjautunut sisään</p>
       )}

@@ -56,7 +56,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     .then(async (res) => {
       if (!res.ok) throw new Error('Failed to fetch user');
       const data = await res.json();
-      console.log(data);
       setUser(data);
     })
     .catch(() => setUser(null))
