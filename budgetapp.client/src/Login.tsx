@@ -34,8 +34,6 @@ function Login() {
       fetch('https://budgetapi.tonitu.dev/api/user/login', options)
         .then(response => response.json())
         .then(data => {
-          console.log(data);
-
             // Check if login was successful
             if(data.token !== undefined)
             {
