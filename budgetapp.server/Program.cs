@@ -48,9 +48,20 @@ public partial class Program
             options.AddPolicy(name: MyAllowSpecificOrigins,
                 policy =>
                 {
-                    policy.WithOrigins("https://budget.tonitu.dev")
-                        .AllowAnyMethod()
-                        .AllowAnyHeader();
+                    policy.SetIsOriginAllowed(origin =>
+                    {
+                        // Allow the production domain
+                        if (origin == "https://budget.tonitu.dev")
+                            return true;
+
+                        // Allow localhost with any port
+                        if (origin.StartsWith("http://localhost:") || origin.StartsWith("https://localhost:"))
+                            return true;
+
+                        return false;
+                    })
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
                 });
         });
 
