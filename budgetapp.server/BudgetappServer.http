@@ -11,7 +11,7 @@ content-type: application/json
 
 GET http://localhost:5000/api/user/myinformation
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjY3ZjhlYzJmMDE2MzA0ZTJiOTNjOGY2MyIsImV4cCI6MTc0NDkyNTk4NywiaXNzIjoiQnVkZ2V0YXBwIiwiYXVkIjoiQnVkZ2V0YXBwVXNlcnMifQ.SbUogc_4tKX6poIbh8plb-9SHtQ-NT0GZ2Pj8HswomI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjY4MDY2ZTc2MTIxYjhhMTcxNmNhYTkxNiIsImV4cCI6MTc0NTI1NTU2MSwiaXNzIjoiQnVkZ2V0YXBwIiwiYXVkIjoiQnVkZ2V0YXBwVXNlcnMifQ.qoBdQUh3r_jKJXVqqua23vQkuFaEH3Gr_1n0JbHt37o
 ###
 
 POST http://localhost:5000/api/user/new
@@ -38,13 +38,20 @@ content-type: application/json
 
 PATCH http://localhost:5000/api/user/myinformation
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjY3ZjhlYzJmMDE2MzA0ZTJiOTNjOGY2MyIsImV4cCI6MTc0NDkzMzY3NCwiaXNzIjoiQnVkZ2V0YXBwIiwiYXVkIjoiQnVkZ2V0YXBwVXNlcnMifQ.AId2URB2-TuhmqOuiVrIH174jJKy6b45LM5Dq7UQ5PQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjY4MDY2ZTc2MTIxYjhhMTcxNmNhYTkxNiIsImV4cCI6MTc0NTI1NTU2MSwiaXNzIjoiQnVkZ2V0YXBwIiwiYXVkIjoiQnVkZ2V0YXBwVXNlcnMifQ.qoBdQUh3r_jKJXVqqua23vQkuFaEH3Gr_1n0JbHt37o
 {
-	"Firstname": "test",
-	"Lastname": "user"
+	"Salary": 3500,
+	"HousingAllowance": 1000,
+	"StudyAllowance": 300,
+	"OtherIncome": [50],
+	"Rent": 800.10,
+	"Mortage": 110.50,
+	"ElectricityBill": 100,
+	"Food": 300,
+	"OtherExpenses": [50, 100]
 }
 
 ###
 DELETE http://localhost:5000/api/user/myinformation
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjY3ZjhlYzJmMDE2MzA0ZTJiOTNjOGY2MyIsImV4cCI6MTc0NDkzNTYwNCwiaXNzIjoiQnVkZ2V0YXBwIiwiYXVkIjoiQnVkZ2V0YXBwVXNlcnMifQ.u0zHWgdnnIapUoS0uxtn1PUX3GFxHoPqgiiMThjBauQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjY4MDE4Y2U1ZTY1OGU0OGMxMTkyODg0YSIsImV4cCI6MTc0NTI1NTUxOCwiaXNzIjoiQnVkZ2V0YXBwIiwiYXVkIjoiQnVkZ2V0YXBwVXNlcnMifQ.yZvFDDKI3u2d2XDrEIDAmO7KiDdKWQ24roHykiKBPgA

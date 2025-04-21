@@ -42,7 +42,27 @@ public class Usercontroller : ControllerBase
             return NotFound("No data available");
         }
 
-        return Ok(myData);
+        //tehään kopio ja palautetaan kaikki paitsi salasana
+        var passwordlessData = new User
+        {
+            Id = myData.Id,
+            Username = myData.Username,
+            Firstname = myData.Firstname,
+            Lastname = myData.Lastname,
+            Salary = myData.Salary,
+            HousingAllowance = myData.HousingAllowance,
+            StudyAllowance = myData.StudyAllowance,
+            OtherIncome = myData.OtherIncome,
+            Rent = myData.Rent,
+            Mortage = myData.Mortage,
+            ElectricityBill = myData.ElectricityBill,
+            Food = myData.Food,
+            OtherExpenses = myData.OtherExpenses,
+            Email = myData.Email,
+            Phone = myData.Phone
+        };
+
+        return Ok(passwordlessData);
     }
 
     [Authorize]
