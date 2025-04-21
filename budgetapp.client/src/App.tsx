@@ -3,7 +3,7 @@ import { useAuth } from './AuthContext';
 import { NavLink } from "react-router";
 
 function App() {
-  const { token, isLoggedIn } = useAuth();
+  const { isLoggedIn, user } = useAuth();
 
   return (
     <>
@@ -11,7 +11,11 @@ function App() {
     <p>Pieniä testailuja</p>
 
     <div>
-      {isLoggedIn ? <p>Token: {token}</p> : <p>Et ole kirjautunut sisään</p>}
+      {isLoggedIn && user ? (
+        <h2>Hyvää päivää, {user.firstname}!</h2>
+      ) : (
+        <p>Et ole kirjautunut sisään</p>
+      )}
     </div>
 
     {isLoggedIn ? (
