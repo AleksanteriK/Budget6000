@@ -5,17 +5,39 @@ import { Formik, Form, Field } from 'formik';
 import toast, { Toaster } from 'react-hot-toast';
 
 function Account() {
-  const { isLoggedIn, user, token } = useAuth();
+  const { isLoggedIn, user, token, setToken } = useAuth();
 
   if (!isLoggedIn || !user) {
     return <p>Et ole kirjautunut sisään</p>;
   }
 
+  const handleDelete = () => {
+    const options = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+    };
+
+    fetch('https://budgetapi.tonitu.dev/api/user/myinformation', options)
+      .then(response => {
+        if (response.status === 204) {
+          toast.success("Kaikki tietosi ovat poistettu");
+          setToken(null);
+        } else {
+          toast.error("Ongelma tietojen poistossa");
+          console.log(response);
+        }
+      })
+      .catch(() => toast.error("Virhe palvelimessa"));
+  };
+
   return (
     <>
       <h2>Omat tiedot</h2>
       <NavLink to="/">Takaisin</NavLink>
-      <Toaster/>
+      <Toaster />
       <Formik
         initialValues={{
           firstname: user.firstname,
@@ -48,29 +70,36 @@ function Account() {
         }}
       >
         {() => (
-          <Form className="form-group">
-            <br/>
-            <br/>
-            <label htmlFor="firstname">Käyttäjätunnus</label>
-            <h3>{user.username}</h3>
-            <br/>
-            <br/>
-            <label htmlFor="firstname">Etunimi</label>
-            <Field name="firstname" type="text" placeholder="Etunimi" />
-            <br/>
-            <br/>
-            <label htmlFor="lastname">Sukunimi</label>
-            <Field name="lastname" type="text" placeholder="Sukunimi" />
-            <br/>
-            <br/>
-            <label htmlFor="email">Sähköposti</label>
-            <Field name="email" type="email" placeholder="Sähköposti" />
-            <br/>
-            <br/>
-            <label htmlFor="phone">Puhelinnumero</label>
-            <Field name="phone" type="text" placeholder="Puhelin" />
-            <button className='general-button' type="submit">Tallenna</button>
-          </Form>
+          <>
+            <Form className="form-group">
+              <br />
+              <br />
+              <label htmlFor="firstname">Käyttäjätunnus</label>
+              <h3>{user.username}</h3>
+              <br />
+              <br />
+              <label htmlFor="firstname">Etunimi</label>
+              <Field name="firstname" type="text" placeholder="Etunimi" />
+              <br />
+              <br />
+              <label htmlFor="lastname">Sukunimi</label>
+              <Field name="lastname" type="text" placeholder="Sukunimi" />
+              <br />
+              <br />
+              <label htmlFor="email">Sähköposti</label>
+              <Field name="email" type="email" placeholder="Sähköposti" />
+              <br />
+              <br />
+              <label htmlFor="phone">Puhelinnumero</label>
+              <Field name="phone" type="text" placeholder="Puhelin" />
+              <button className='general-button' type="submit">Tallenna</button>
+            </Form>
+            <a onClick={() => {
+              if (window.confirm("Haluatko varmasti poistaa kaikki tietosi?")) {
+                handleDelete();
+              }
+            }}>Poista kaikki data</a>
+          </>
         )}
       </Formik>
     </>
@@ -78,4 +107,6 @@ function Account() {
 }
 
 export default Account;
+
+
 
