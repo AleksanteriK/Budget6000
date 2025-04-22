@@ -43,6 +43,8 @@ function Analytics() {
                               (user.mortage ?? 0) + 
                               (totalOtherExpenses ?? 0);
 
+        let incomeExpenseDifference = totalIncome - totalExpenses;
+
         // Lasketaan kela tuloraja (opintotuki kk * 1118 + tulottomat kk * 3355x3)
         let allowanceMonths = user.studyAllowanceMonths ?? 0;
         let incomeLimit = (1118 * allowanceMonths) + (3355 * (12 - allowanceMonths));
@@ -51,7 +53,7 @@ function Analytics() {
             <>
                 <Card className='analytics-card'>
                     <Card.Body>
-                    <Card.Title>{year}</Card.Title>
+                    <Card.Title>Vuosi {year}</Card.Title>
                     <Row>
                         <br></br>
                         <Col>
@@ -60,6 +62,18 @@ function Analytics() {
                         <br></br>
                         <Col>
                         Menoja yhteensä <span className='analytics-card-expenses'>{totalExpenses} € </span>
+                        </Col>
+                        <br></br>
+                        <Col>
+                        {incomeExpenseDifference < 0 ? (
+                        <>
+                        <span className="analytics-card-expenses">Menosi ovat suuremmat kuin tulot!</span>
+                        </>
+                        ) : (
+                        <>
+                            <span className="analytics-card-income">Tulosi ovat suuremmat kuin menot!</span>
+                        </>
+                        )}
                         </Col>
                     </Row>
                     </Card.Body>
