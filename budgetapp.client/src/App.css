@@ -81,3 +81,29 @@
 .signup-form button:hover {
   background-color: #5056c7;
 }
+
+.analytics-card {
+  display: flex;
+  font-weight: bold;
+  font-size: larger;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color:#555;
+  border-radius: 8px;
+  border-style: solid;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.analytics-card-income {
+  color: lightgreen;
+}
+
+.analytics-card-expenses {
+  color: orangered;
+}
+
+.general-button {
+  margin: 0.5rem;
+}

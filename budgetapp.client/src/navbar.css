@@ -22,8 +22,6 @@
     font-size: 30px;
   }
 
-  
-  /* Sidebar */
   .sidebar {
     position: fixed;
     top: 0;
@@ -89,3 +87,43 @@
     margin-top: 0.25rem;
   }
   
+  /* mobiilille */
+  @media (max-width: 768px) {
+    .sidebar {
+      position: relative;
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      padding: 0.5rem 0;
+    }
+
+    .sidebar ul {
+      display: flex;
+      flex-direction:column;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      justify-content: space-around;
+    }
+
+    .sidebar li {
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sidebar a {
+      justify-content: center;
+    }
+
+    .icon {
+      margin: 0;
+    }
+
+    .note {
+      display: none;
+    }
+  }

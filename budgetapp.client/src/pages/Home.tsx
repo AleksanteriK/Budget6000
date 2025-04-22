@@ -107,7 +107,8 @@ function Home() {
       initialValues={{
         salary: user.salary || 0,
         housingAllowance: user.housingAllowance || 0,
-        studyAllowance: user.studyAllowance || 0
+        studyAllowance: user.studyAllowance || 0,
+        studyAllowanceMonths: user.studyAllowanceMonths || 0
       }}
       onSubmit={(values) => {
         const options = {
@@ -148,8 +149,13 @@ function Home() {
           </div>
 
           <div>
-            <label>Opintotuki (€ / Vuosi): </label>
+            <label>Opintotuki (€ / Kuukausi): </label>
             <Field type="number" name="studyAllowance" placeholder="Opintotuki" />
+          </div>
+
+          <div>
+            <label>Opintotukikuukausien lukumäärä: </label>
+            <Field type="number" name="studyAllowanceMonths" placeholder="Opintotukikuukaudet" />
           </div>
 
           <br />
@@ -246,9 +252,10 @@ function Home() {
       </>
     ) : (
       <>
-        <button onClick={toggleIncomeSection}>Omat tulot</button>
-        <button onClick={toggleExpenseSection}>Omat menot</button>
-        <button onClick={toggleOtherSection}>Muut</button>
+        <h2>Hei {user.firstname}</h2>
+        <button className='general-button' onClick={toggleIncomeSection}>Omat tulot</button>
+        <button className='general-button' onClick={toggleExpenseSection}>Omat menot</button>
+        <button className='general-button' onClick={toggleOtherSection}>Muut</button>
         {activeSection === "income" && <IncomeSection key="income" />}
         {activeSection === "expenses" && <ExpenceSection key="expenses" />}
         {activeSection === "other" && <OtherSection key="other" />}

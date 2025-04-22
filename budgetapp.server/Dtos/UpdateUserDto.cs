@@ -17,6 +17,8 @@ public class UpdateUserDto
 
     public double? StudyAllowance { get; set; }
 
+    public int? StudyAllowanceMonths { get; set; }
+
     public List<double>? OtherIncome { get; set; }
 
     public double? Rent { get; set; }

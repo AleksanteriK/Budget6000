@@ -30,6 +30,9 @@ public class User
     [BsonElement("study_allowance")]
     public double StudyAllowance { get; set; }
 
+    [BsonElement("study_allowance_months")]
+    public int StudyAllowanceMonths { get; set; }
+
     [BsonElement("other_income")]
     public List<double> OtherIncome { get; set; }
 

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using BudgetappServer.Services;
 using BudgetappServer.Dtos;
 using BudgetappServer.Models;
+using MongoDB.Driver;
 
 namespace BudgetappServer.Controllers;
 
@@ -98,7 +99,7 @@ public class Usercontroller : ControllerBase
             if (newValue != null)
             {
                 var modifiedProperty = typeof(User).GetProperty(property.Name);
-                
+
                 if (modifiedProperty != null && modifiedProperty.CanWrite)
                 {
                     modifiedProperty.SetValue(userData, newValue);
@@ -109,6 +110,46 @@ public class Usercontroller : ControllerBase
         await _userService.UpdateUserDataAsync(userIdInToken, userData);
 
         return Ok();
+    }
+
+    [Authorize]
+    [HttpPatch("newpassword")]
+    public async Task<ActionResult> ChangePasswordInActiveSession([FromBody] ChangePasswordDto PasswordChangeDto)
+    {
+        var user = await _userService.GetUserByUserNameAsync(PasswordChangeDto.Username);
+
+        if (user == null)
+        {
+            return Unauthorized("Wrong username.");
+        }
+
+        var userIdInToken = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        if (string.IsNullOrEmpty(userIdInToken))
+        {
+            return Unauthorized("Bad token");
+        }
+
+        if (!BCrypt.Net.BCrypt.Verify(PasswordChangeDto.OldPassword, user.Password))
+        {
+            return Unauthorized("Old password is incorrect.");
+        }
+
+        var hashedPassword = BCrypt.Net.BCrypt.HashPassword(PasswordChangeDto.NewPassword);
+
+        var update = Builders<User>.Update.Set(u => u.Password, hashedPassword);
+
+        var updateResult = await _userService.UpdateUserPasswordAsync(user.Id, update);
+
+        if (updateResult.ModifiedCount == 1)
+        {
+            return Ok("Password updated successfully.");
+        }
+
+        else
+        {
+            return StatusCode(500, "Failed to update password.");
+        }
     }
 
     [HttpPost("new")]
@@ -205,7 +246,7 @@ public class Usercontroller : ControllerBase
         {
             return NoContent();
         }
-        
+
         else
         {
             return StatusCode(500, "Something went wrong on the server side, could not delete any data");

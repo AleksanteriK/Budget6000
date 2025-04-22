@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import { FaArrowLeft, FaBars, FaHome, FaUser, FaDoorOpen } from "react-icons/fa";
+import { FaArrowLeft, FaBars, FaHome, FaUser, FaDoorOpen, FaCalendar } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useAuth } from "./AuthContext";
 import "./Navbar.css";
@@ -15,7 +15,7 @@ export default function Navbar() {
   useEffect(() => {
     localStorage.setItem("sidebarExpanded", JSON.stringify(expanded));
   }, [expanded]);
-
+  
   return (
     <>
       <div className={`sidebar ${expanded ? "expanded" : "collapsed"}`}>
@@ -32,6 +32,12 @@ export default function Navbar() {
             <NavLink to="/">
               <FaHome className="icon" />
               {expanded && <span>{user?.firstname}</span>}
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/analytics">
+              <FaCalendar className="icon" />
+              {expanded && <span>Tulot ja menot</span>}
             </NavLink>
           </li>
           <li>

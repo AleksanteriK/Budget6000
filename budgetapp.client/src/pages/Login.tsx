@@ -51,6 +51,7 @@ function Login() {
   return (
     <>
       <div><Toaster /></div>
+      <h1>Budget6000</h1>
       <Formik
         initialValues={{ username: '', password: '' }}
         onSubmit={handleLogin}
