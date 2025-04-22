@@ -1,23 +1,15 @@
-import { BrowserRouter, Routes, Route } from "react-router";
+import { BrowserRouter } from "react-router";
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
-import Login from './Login.tsx'
-import Logout from './Logout.tsx'
-import Signup from "./Signup.tsx";
 import { AuthProvider } from './AuthContext';
 
 createRoot(document.getElementById('root')!).render(
+
   <AuthProvider>
     <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="login" element={<Login />} />
-          <Route path="signup" element={<Signup />} />
-          { /*TODO: Tiedostot puuttuu vielä */}
-          <Route path="account" element={<App />} />
-          <Route path="logout" element={<Logout />} />
-        </Routes>
+      <App />
     </BrowserRouter>
-  </AuthProvider>,
+  </AuthProvider>
+
 )

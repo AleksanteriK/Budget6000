@@ -1,4 +1,3 @@
-import './App.css'
 import { NavLink } from "react-router";
 import { Formik, Field, Form } from 'formik';
 import toast, { Toaster } from 'react-hot-toast';

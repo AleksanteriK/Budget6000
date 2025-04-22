@@ -1,0 +1,92 @@
+.toggle-btn {
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    padding: 1rem;
+  }
+  
+  .toggle-btn.expanded {
+    justify-content: space-between;
+  }
+
+  
+  .logo {
+    margin-left: 1rem;
+    font-size: 1.2rem;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .menu-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+
+  
+  /* Sidebar */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: #222;
+    color: white;
+    transition: width 0.3s ease;
+    overflow-x: hidden;
+    padding-top: 2rem;
+    z-index: 100;
+  }
+  
+  .sidebar.expanded {
+    width: 250px;
+  }
+  
+  .sidebar.collapsed {
+    width: 60px;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar li {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+  }
+  
+  .sidebar a {
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    width: 100%;
+  }
+  
+  .sidebar a:hover {
+    background-color: #333;
+  }
+  
+  .icon {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+  }
+  
+  .sidebar.collapsed .icon {
+    margin: 0 auto;
+  }
+  
+  .sidebar.collapsed span {
+    display: none;
+  }
+  
+  .note {
+    display: block;
+    font-size: 0.8rem;
+    color: #aaa;
+    margin-left: 2.5rem;
+    margin-top: 0.25rem;
+  }
+  

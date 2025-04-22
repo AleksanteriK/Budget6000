@@ -1,6 +1,6 @@
-import './App.css'
+import '../App.css'
 import { NavLink } from "react-router";
-import { useAuth } from './AuthContext';
+import { useAuth } from '../AuthContext';
 import { useEffect } from 'react';
 
 function Logout() {
@@ -20,4 +20,4 @@ function Logout() {
   )
 }
 
-export default Logout
+export default Logout;
