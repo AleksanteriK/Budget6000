@@ -51,6 +51,7 @@ function Login() {
   return (
     <>
       <div><Toaster /></div>
+      <img src="/logo.png" alt="Logo" style={{ width: '25%', height: 'auto' }} />
       <h1>Budget6000</h1>
       <Formik
         initialValues={{ username: '', password: '' }}

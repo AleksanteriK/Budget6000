@@ -16,6 +16,7 @@ export default function Navbar() {
   return (
     <>
       <div className={`sidebar ${expanded ? "expanded" : "collapsed"}`}>
+      <img src="/logo.png" alt="Logo" style={{ width: '50%', height: 'auto' }} />
         <ul>
           <li>
             <a className={`toggle-btn ${expanded ? "expanded" : ""}`} onClick={() => setExpanded(!expanded)}>
