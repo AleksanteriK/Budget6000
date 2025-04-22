@@ -34,7 +34,6 @@ function Login() {
       fetch('https://budgetapi.tonitu.dev/api/user/login', options)
         .then(response => response.json())
         .then(data => {
-            // Check if login was successful
             if(data.token !== undefined)
             {
                 toast.success("Kirjauduttu sisään!");
@@ -53,7 +52,7 @@ function Login() {
 
   return (
     <>
-      <div><Toaster/></div>
+      <Toaster/>
       <Formik
       initialValues={{ username: '', password: '' }}
       onSubmit={handleLogin}
