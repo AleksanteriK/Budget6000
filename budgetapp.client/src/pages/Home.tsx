@@ -252,7 +252,7 @@ function Home() {
       </>
     ) : (
       <>
-        <h2>Hei {user.firstname}</h2>
+        <h2>Hei {user.firstname} {user.lastname}!</h2>
         <button className='general-button' onClick={toggleIncomeSection}>Omat tulot</button>
         <button className='general-button' onClick={toggleExpenseSection}>Omat menot</button>
         <button className='general-button' onClick={toggleOtherSection}>Muut</button>

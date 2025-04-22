@@ -1,9 +1,7 @@
 .toggle-btn {
     display: flex;
-    align-items: center;
     color: white;
     text-decoration: none;
-    padding: 1rem;
     justify-content: flex-start;
   }
   
@@ -17,10 +15,11 @@
     color: white;
     text-decoration: none;
   }
-  
-  .menu-icon {
-    font-size: 1.5rem;
+
+  .toggle-btn {
     cursor: pointer;
+    align-items: center;
+    font-size: 30px;
   }
 
   .sidebar {
