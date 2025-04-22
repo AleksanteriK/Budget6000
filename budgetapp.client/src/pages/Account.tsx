@@ -5,7 +5,7 @@ import { Formik, Form, Field } from 'formik';
 import toast, { Toaster } from 'react-hot-toast';
 
 function Account() {
-  const { isLoggedIn, user, token, setToken } = useAuth();
+  const { isLoggedIn, user, token, refreshUser, setToken } = useAuth();
 
   if (!isLoggedIn || !user) {
     return <p>Et ole kirjautunut sisään</p>;
@@ -63,6 +63,9 @@ function Account() {
               }
 
               toast.success("Tietojen tallentaminen onnistui!");
+
+              // Refresh user
+              refreshUser();
             })
             .catch(() => {
               toast.error("Tietojen tallentaminen epäonnistui!");

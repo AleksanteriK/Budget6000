@@ -41,23 +41,67 @@ function Analytics() {
                               (user.electricityBill ?? 0) + 
                               (user.mortage ?? 0) + 
                               (totalOtherExpenses ?? 0);
+
+        let incomeExpenseDifference = totalIncome - totalExpenses;
+
+        // Lasketaan kela tuloraja (opintotuki kk * 1118 + tulottomat kk * 3355x3)
+        let allowanceMonths = user.studyAllowanceMonths ?? 0;
+        let incomeLimit = (1118 * allowanceMonths) + (3355 * (12 - allowanceMonths));
         
         return (
-            <Card className='analytics-card'>
-                <Card.Body>
-                <Card.Title>{year}</Card.Title>
-                <Row>
-                    <br></br>
-                    <Col>
-                    Tienaat yhteensä <span className='analytics-card-income'>{totalIncome} € </span>
-                    </Col>
-                    <br></br>
-                    <Col>
-                    Menoja yhteensä <span className='analytics-card-expenses'>{totalExpenses} € </span>
-                    </Col>
-                </Row>
+            <>
+                <Card className='analytics-card'>
+                    <Card.Body>
+                    <Card.Title>Vuosi {year}</Card.Title>
+                    <Row>
+                        <br></br>
+                        <Col>
+                        Tienaat yhteensä <span className='analytics-card-income'>{totalIncome} € </span>
+                        </Col>
+                        <br></br>
+                        <Col>
+                        Menoja yhteensä <span className='analytics-card-expenses'>{totalExpenses} € </span>
+                        </Col>
+                        <br></br>
+                        <Col>
+                        {incomeExpenseDifference < 0 ? (
+                        <>
+                        <span className="analytics-card-expenses">Menosi ovat suuremmat kuin tulot!</span>
+                        </>
+                        ) : (
+                        <>
+                            <span className="analytics-card-income">Tulosi ovat suuremmat kuin menot!</span>
+                        </>
+                        )}
+                        </Col>
+                    </Row>
+                    </Card.Body>
+                </Card>
+                <br></br>
+                <Card className='analytics-card'>
+                    <Card.Body>
+                    <Card.Title>Kela</Card.Title>
+                    <Row>
+                        <br></br>
+                        <Col>
+                        Tuloraja vuodelle {year}: <span className='analytics-card-income'>{incomeLimit} € </span>
+                        </Col>
+                        <br></br>
+                        <Col>
+                        {totalIncome > incomeLimit ? (
+                        <>
+                        <span className="analytics-card-expenses">Ylität tulorajan! Tienaat {(incomeLimit - totalIncome) * -1} € liikaa!</span>
+                        </>
+                        ) : (
+                        <>
+                            <span className="analytics-card-income">Et ylitä tulorajaa! Voit tienata vielä {incomeLimit - totalIncome} €!</span>
+                        </>
+                        )}
+                        </Col>
+                    </Row>
                 </Card.Body>
             </Card>
+            </>
         );
     }
 
