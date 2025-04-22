@@ -1,12 +1,9 @@
 import { NavLink } from "react-router";
 import { FaArrowLeft, FaBars, FaUser, FaDoorOpen, FaChartPie, FaMoneyBillWave } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import { useAuth } from "./AuthContext";
 import "./navbar.css";
 
 export default function Navbar() {
-  const { user } = useAuth();
-
   const [expanded, setExpanded] = useState(() => {
     const savedState = localStorage.getItem("sidebarExpanded");
     return savedState ? JSON.parse(savedState) : true;
