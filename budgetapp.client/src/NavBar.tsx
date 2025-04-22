@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import { FaArrowLeft, FaBars, FaHome, FaUser, FaDoorOpen, FaCalendar } from "react-icons/fa";
+import { FaArrowLeft, FaBars, FaUser, FaDoorOpen, FaChartPie, FaMoneyBillWave } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useAuth } from "./AuthContext";
 import "./navbar.css";
@@ -30,14 +30,14 @@ export default function Navbar() {
           </li>
           <li>
             <NavLink to="/">
-              <FaHome className="icon" />
-              {expanded && <span>{user?.firstname}</span>}
+              <FaMoneyBillWave className="icon" />
+              {expanded && <span>Tulot ja Menot</span>}
             </NavLink>
           </li>
           <li>
             <NavLink to="/analytics">
-              <FaCalendar className="icon" />
-              {expanded && <span>Tulot ja menot</span>}
+              <FaChartPie className="icon" />
+              {expanded && <span>Tilastot</span>}
             </NavLink>
           </li>
           <li>
