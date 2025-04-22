@@ -4,6 +4,7 @@
     color: white;
     text-decoration: none;
     padding: 1rem;
+    justify-content: flex-start;
   }
   
   .toggle-btn.expanded {

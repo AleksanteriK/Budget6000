@@ -2,22 +2,25 @@ import { Routes, Route, Navigate } from 'react-router';
 import { ReactNode } from "react";
 import { Toaster } from 'react-hot-toast';
 
-import './App.css'
+import './App.css';
 import Navbar from './NavBar';
 import { useAuth } from './AuthContext';
 import { Login, Logout, Home, LoadingSpinner, Account, Signup } from "./pages";
 
+// Define types for the PrivateRoute props
+interface PrivateRouteProps {
+  children: ReactNode;
+}
 
-function PrivateRoute({ children }: { children: ReactNode }) {
+function PrivateRoute({ children }: PrivateRouteProps) {
   const { user, loadingUser } = useAuth();
 
   if (loadingUser) {
     return <LoadingSpinner message="Ladataan käyttäjätietoja..." />;
   }
 
-  return user ? children : <Navigate to="/login" replace />;
+  return user ? <>{children}</> : <Navigate to="/login" replace />;
 }
-
 
 function App() {
   return (
@@ -29,6 +32,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/logout" element={<Logout />} />
 
+        {/* Use PrivateRoute inside the element prop */}
         <Route
           path="/"
           element={
@@ -39,11 +43,16 @@ function App() {
           }
         />
 
-        <PrivateRoute>
-          <Route path="/account" element={<Account />} />
-        </PrivateRoute>
-        
-
+        {/* Protect account route using PrivateRoute */}
+        <Route
+          path="/account"
+          element={
+            <PrivateRoute>
+              <Navbar />
+              <Account />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </>
   );
