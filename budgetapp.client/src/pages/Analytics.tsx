@@ -56,11 +56,11 @@ function Analytics() {
                     <Row>
                         <br></br>
                         <Col>
-                        Tienaat yhteensä <span className='analytics-card-income'>{totalIncome} € </span>
+                        Tulot vuositasolla <span className='analytics-card-income'>{totalIncome} € </span>
                         </Col>
                         <br></br>
                         <Col>
-                        Menoja yhteensä <span className='analytics-card-expenses'>{totalExpenses} € </span>
+                        Menot vuositasolla <span className='analytics-card-expenses'>{totalExpenses} € </span>
                         </Col>
                         <br></br>
                         <Col>
@@ -73,6 +73,19 @@ function Analytics() {
                             <span className="analytics-card-income">Tulosi ovat suuremmat kuin menot!</span>
                         </>
                         )}
+                        </Col>
+                        <br></br>
+                        <Col>
+                            Käteen jää 
+                            {incomeExpenseDifference < 0 ? (
+                            <>
+                                <span className="analytics-card-expenses"> {incomeExpenseDifference.toFixed(2)} €</span>
+                            </>
+                            ) : (
+                            <>
+                                <span className="analytics-card-income"> {incomeExpenseDifference.toFixed(2)} €</span>
+                            </>
+                            )}
                         </Col>
                     </Row>
                     </Card.Body>
@@ -132,6 +145,8 @@ function Analytics() {
                                 (user.mortage ?? 0) / 12 + 
                                 (totalOtherExpenses ?? 0);
 
+        let incomeExpenseDifference = monthlyIncome - monthlyExpenses;
+
         return (
             <>
                 <Card className='analytics-card'>
@@ -145,6 +160,19 @@ function Analytics() {
                             <br></br>
                             <Col>
                                 Menot Kuukausitasolla <span className='analytics-card-expenses'>{monthlyExpenses.toFixed(2)} €</span>
+                            </Col>
+                            <br></br>
+                            <Col>
+                                Käteen jää 
+                                {incomeExpenseDifference < 0 ? (
+                                <>
+                                    <span className="analytics-card-expenses"> {incomeExpenseDifference.toFixed(2)} €</span>
+                                </>
+                                ) : (
+                                <>
+                                    <span className="analytics-card-income"> {incomeExpenseDifference.toFixed(2)} €</span>
+                                </>
+                                )}
                             </Col>
                         </Row>
                     </Card.Body>
@@ -180,6 +208,8 @@ function Analytics() {
                                (user.mortage ?? 0) / 52 + 
                                (totalOtherExpenses ?? 0);
 
+        let incomeExpenseDifference = weeklyIncome - weeklyExpenses;
+
         return (
             <>
                 <Card className='analytics-card'>
@@ -193,6 +223,19 @@ function Analytics() {
                             <br></br>
                             <Col>
                                 Menot viikkotasolla <span className='analytics-card-expenses'>{weeklyExpenses.toFixed(2)} €</span>
+                            </Col>
+                            <br></br>
+                            <Col>
+                                Käteen jää 
+                                {incomeExpenseDifference < 0 ? (
+                                <>
+                                    <span className="analytics-card-expenses"> {incomeExpenseDifference.toFixed(2)} €</span>
+                                </>
+                                ) : (
+                                <>
+                                    <span className="analytics-card-income"> {incomeExpenseDifference.toFixed(2)} €</span>
+                                </>
+                                )}
                             </Col>
                         </Row>
                     </Card.Body>
