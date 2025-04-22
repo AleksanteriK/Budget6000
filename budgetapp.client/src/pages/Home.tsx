@@ -108,7 +108,7 @@ function Home() {
         salary: user.salary || 0,
         housingAllowance: user.housingAllowance || 0,
         studyAllowance: user.studyAllowance || 0,
-        studyAllowanceMonths: user.studyAllowanceMonths || 0,
+        studyAllowanceMonths: user.studyAllowanceMonths || 0
       }}
       onSubmit={(values) => {
         const options = {

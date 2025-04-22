@@ -1,12 +1,10 @@
 import '../App.css'
 import { useAuth } from '../AuthContext';
 import { NavLink } from "react-router";
-import { useNavigate } from "react-router";
 import { useState } from 'react';
 import { Card, Row, Col } from 'react-bootstrap';
 
 function Analytics() {
-  let navigate = useNavigate();
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
   const { isLoggedIn, user } = useAuth();
@@ -16,7 +14,7 @@ function Analytics() {
   }
 
     const ShowPerYear = () => {
-        const [year, setYear] = useState(new Date().getFullYear());
+        const [year] = useState(new Date().getFullYear());
 
         //lasketaan kaikki tulot vuodelta
         let totalOtherIncome = 0;

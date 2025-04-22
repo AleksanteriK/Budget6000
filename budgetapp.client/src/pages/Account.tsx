@@ -2,12 +2,9 @@ import '../App.css'
 import { useAuth } from '../AuthContext';
 import { NavLink } from "react-router";
 import { Formik, Form, Field } from 'formik';
-import { useNavigate } from "react-router";
 import toast, { Toaster } from 'react-hot-toast';
 
 function Account() {
-  let navigate = useNavigate();
-
   const { isLoggedIn, user, token } = useAuth();
 
   if (!isLoggedIn || !user) {
