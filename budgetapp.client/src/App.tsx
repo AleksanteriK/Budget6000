@@ -28,18 +28,21 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/logout" element={<Logout />} />
-        
+
         <Route
           path="/"
           element={
             <PrivateRoute>
-             <Navbar />
+              <Navbar />
               <Home />
             </PrivateRoute>
           }
         />
+
+        <PrivateRoute>
+          <Route path="/account" element={<Account />} />
+        </PrivateRoute>
         
-        <Route path="/account" element={<Account/>} />
 
       </Routes>
     </>
