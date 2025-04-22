@@ -78,6 +78,7 @@ function Analytics() {
                     </Row>
                     </Card.Body>
                 </Card>
+                <br></br>
                 <Card className='analytics-card'>
                     <Card.Body>
                     <Card.Title>Kela</Card.Title>
