@@ -6,7 +6,6 @@ import { Card, Row, Col } from 'react-bootstrap';
 
 function Analytics() {
   const [activeSection, setActiveSection] = useState<string | null>(null);
-
   const { isLoggedIn, user } = useAuth();
 
   if (!isLoggedIn || !user) {

@@ -54,6 +54,7 @@ public class Usercontroller : ControllerBase
             HousingAllowance = myData.HousingAllowance,
             StudyAllowance = myData.StudyAllowance,
             OtherIncome = myData.OtherIncome,
+            StudyAllowanceMonths = myData.StudyAllowanceMonths,
             Rent = myData.Rent,
             Mortage = myData.Mortage,
             ElectricityBill = myData.ElectricityBill,
