@@ -2,7 +2,7 @@ import { NavLink } from "react-router";
 import { FaArrowLeft, FaBars, FaHome, FaUser, FaDoorOpen, FaCalendar } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { useAuth } from "./AuthContext";
-import "./Navbar.css";
+import "./navbar.css";
 
 export default function Navbar() {
   const { user } = useAuth();
