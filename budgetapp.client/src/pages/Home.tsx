@@ -6,7 +6,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { Formik, Form, Field, FieldArray } from 'formik';
 
 function Home() {
-  const { isLoggedIn, user, token } = useAuth();
+  const { isLoggedIn, user, token, refreshUser } = useAuth();
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
   if (!isLoggedIn || !user) {
@@ -38,6 +38,9 @@ function Home() {
           }
 
           toast.success("Tietojen tallentaminen onnistui!");
+
+          // Refresh user
+          refreshUser();
         })
         .catch(() => {
           toast.error("Tietojen tallentaminen epäonnistui!");
@@ -128,6 +131,9 @@ function Home() {
           }
 
           toast.success("Tietojen tallentaminen onnistui!");
+
+          // Refresh user
+          refreshUser();
         })
         .catch(() => {
           toast.error("Tietojen tallentaminen epäonnistui!");
@@ -192,6 +198,9 @@ function Home() {
           }
 
           toast.success("Tietojen tallentaminen onnistui!");
+
+          // Refresh user
+          refreshUser();
         })
         .catch(() => {
           toast.error("Tietojen tallentaminen epäonnistui!");
