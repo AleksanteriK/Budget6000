@@ -1,4 +1,4 @@
-import '../App.css'
+import '../App.css';
 import { useAuth } from '../AuthContext';
 import { NavLink } from "react-router";
 import { Formik, Form, Field } from 'formik';
@@ -10,6 +10,45 @@ function Account() {
   if (!isLoggedIn || !user) {
     return <p>Et ole kirjautunut sisään</p>;
   }
+
+  const handlePasswordChange = (values: { oldPassword: string; newPassword: string; newPasswordAgain: string;}) => {
+    const { oldPassword, newPassword, newPasswordAgain } = values;
+
+    if (!oldPassword || !newPassword) {
+      toast.error("Anna vanha ja uusi salasana!");
+      return;
+    }
+
+    if (newPassword !== newPasswordAgain) {
+      toast.error("Uudet salasanat eivät täsmää!");
+      return;
+    }
+
+    const payload = {
+      username: user.username,
+      oldPassword: oldPassword,
+      newPassword: newPassword,
+    };
+
+    const options = {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify(payload),
+    };
+
+    fetch('https://budgetapi.tonitu.dev/api/user/newpassword', options)
+      .then(response => {
+        if (response.status === 200) {
+          toast.success("Salasana vaihdettu onnistuneesti!");
+        } else {
+          toast.error("Salasanan vaihto epäonnistui!");
+        }
+      })
+      .catch(() => toast.error("Virhe palvelimessa"));
+  };
 
   const handleDelete = () => {
     const options = {
@@ -44,6 +83,9 @@ function Account() {
           lastname: user.lastname,
           email: user.email,
           phone: user.phone,
+          oldPassword: '',
+          newPassword: '',
+          newPasswordAgain: '',
         }}
         onSubmit={(values) => {
           const options = {
@@ -63,8 +105,6 @@ function Account() {
               }
 
               toast.success("Tietojen tallentaminen onnistui!");
-
-              // Refresh user
               refreshUser();
             })
             .catch(() => {
@@ -72,7 +112,7 @@ function Account() {
             });
         }}
       >
-        {() => (
+        {({ values }) => (
           <>
             <Form className="form-group">
               <br />
@@ -97,6 +137,31 @@ function Account() {
               <Field name="phone" type="text" placeholder="Puhelin" />
               <button className='general-button' type="submit">Tallenna</button>
             </Form>
+
+            <Form className="form-group">
+              <label htmlFor="oldPassword">Vanha salasana</label>
+              <Field name="oldPassword" type="password" placeholder="Vanha salasana" />
+              <br />
+              <br />
+              <label htmlFor="newPassword">Uusi salasana</label>
+              <Field name="newPassword" type="password" placeholder="Uusi salasana" />
+              <br />
+              <br />
+              <label htmlFor="newPasswordAgain">Uusi salasana uudestaan</label>
+              <Field name="newPasswordAgain" type="password" placeholder="Uusi salasana uudestaan" />
+              <button 
+                className='general-button' 
+                type="button" 
+                onClick={() => handlePasswordChange({
+                  oldPassword: values.oldPassword, 
+                  newPassword: values.newPassword, 
+                  newPasswordAgain: values.newPasswordAgain
+                })}
+              >
+                Vaihda salasana
+              </button>
+            </Form>
+
             <a onClick={() => {
               if (window.confirm("Haluatko varmasti poistaa kaikki tietosi?")) {
                 handleDelete();
@@ -110,6 +175,3 @@ function Account() {
 }
 
 export default Account;
-
-
-

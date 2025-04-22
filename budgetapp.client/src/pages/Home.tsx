@@ -111,7 +111,7 @@ function Home() {
         salary: user.salary || 0,
         housingAllowance: user.housingAllowance || 0,
         studyAllowance: user.studyAllowance || 0,
-        studyAllowanceMonths: user.studyAllowanceMonths || 0
+        studyAllowanceMonths: user.studyAllowanceMonths || 9 //default 9 kuukautta
       }}
       onSubmit={(values) => {
         const options = {
@@ -131,8 +131,6 @@ function Home() {
           }
 
           toast.success("Tietojen tallentaminen onnistui!");
-
-          // Refresh user
           refreshUser();
         })
         .catch(() => {
@@ -198,8 +196,6 @@ function Home() {
           }
 
           toast.success("Tietojen tallentaminen onnistui!");
-
-          // Refresh user
           refreshUser();
         })
         .catch(() => {

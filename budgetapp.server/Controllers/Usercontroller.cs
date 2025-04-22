@@ -185,6 +185,7 @@ public class Usercontroller : ControllerBase
             Firstname = newUserDto.Firstname,
             Lastname = newUserDto.Lastname,
             Password = hashedPassword,
+            StudyAllowanceMonths = 9,
             Email = newUserDto.Email,
             Phone = newUserDto.Phone
         };
