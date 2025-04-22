@@ -140,12 +140,12 @@ function App() {
 
           <div>
             <label>Asumistuki (€ / Kuukausi): </label>
-            <Field type="number" name="housing_allowance" placeholder="Asumistuki" />
+            <Field type="number" name="housingAllowance" placeholder="Asumistuki" />
           </div>
 
           <div>
             <label>Opintotuki (€ / Kuukausi): </label>
-            <Field type="number" name="study_allowance" placeholder="Opintotuki" />
+            <Field type="number" name="studyAllowance" placeholder="Opintotuki" />
           </div>
 
           <br />
@@ -228,7 +228,7 @@ function App() {
   }
   
   function toggleExpenseSection() {
-    setActiveSection(prev => prev === "expences" ? null : "expences");
+    setActiveSection(prev => prev === "expenses" ? null : "expenses");
   }
 
   return (
@@ -258,7 +258,7 @@ function App() {
         <button onClick={toggleExpenseSection}>Omat menot</button>
         <button onClick={toggleOtherSection}>Muut</button>
         {activeSection === "income" && <IncomeSection key="income" />}
-        {activeSection === "expences" && <ExpenceSection key="expences" />}
+        {activeSection === "expenses" && <ExpenceSection key="expenses" />}
         {activeSection === "other" && <OtherSection key="other" />}
       </>
     )}
