@@ -1,0 +1,124 @@
+import '../App.css'
+import { useAuth } from '../AuthContext';
+import { NavLink } from "react-router";
+import { useNavigate } from "react-router";
+import { useState } from 'react';
+import { Card, Row, Col } from 'react-bootstrap';
+
+function Analytics() {
+  let navigate = useNavigate();
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+
+  const { isLoggedIn, user } = useAuth();
+
+  if (!isLoggedIn || !user) {
+    return <p>Et ole kirjautunut sisään</p>;
+  }
+
+    const ShowPerYear = () => {
+        const [year, setYear] = useState(new Date().getFullYear());
+
+        //lasketaan kaikki tulot vuodelta
+        let totalOtherIncome = 0;
+
+        if (user.otherIncome && Array.isArray(user.otherIncome)) {
+            for (let i = 0; i < user.otherIncome.length; i++) {
+            totalOtherIncome += user.otherIncome[i];
+            }
+        }
+
+        let totalOtherExpenses = 0;
+
+        if (user.otherExpenses && Array.isArray(user.otherExpenses)) {
+            for (let j = 0; j < user.otherExpenses.length; j++) {
+            totalOtherExpenses += user.otherExpenses[j];
+            }
+        }
+
+        const totalIncome = (user.salary ?? 0) + 
+                            (user.studyAllowance ?? 0) * (user.studyAllowanceMonths ?? 0) + 
+                            (totalOtherIncome ?? 0);
+
+        const totalExpenses = (user.rent ?? 0) + 
+                              (user.food ?? 0) + 
+                              (user.electricityBill ?? 0) + 
+                              (user.mortage ?? 0) + 
+                              (totalOtherExpenses ?? 0);
+        
+        return (
+            <Card className='analytics-card'>
+                <Card.Body>
+                <Card.Title>{year}</Card.Title>
+                <Row>
+                    <br></br>
+                    <Col>
+                    Tienaat yhteensä <span className='analytics-card-income'>{totalIncome} € </span>
+                    </Col>
+                    <br></br>
+                    <Col>
+                    Menoja yhteensä <span className='analytics-card-expenses'>{totalExpenses} € </span>
+                    </Col>
+                </Row>
+                </Card.Body>
+            </Card>
+        );
+    }
+
+    const ShowPerMonth = () => {
+        return (
+            <Card>
+                <Card.Body>
+                <Card.Title>{}</Card.Title>
+                <Row>
+                    <Col>Tulot  € </Col>
+                    <Col>Menot  € </Col>
+                </Row>
+                </Card.Body>
+            </Card>
+        );
+    }
+
+    const ShowPerWeek = () => {
+        return (
+            <Card>
+                <Card.Body>
+                <Card.Title>{}</Card.Title>
+                <Row>
+                    <Col>Tulot  € </Col>
+                    <Col>Menot  € </Col>
+                </Row>
+                </Card.Body>
+            </Card>
+        );
+    }
+
+    function togglePerYear() {
+        setActiveSection(activeSection === "perYear" ? null : "perYear");
+    }
+
+    function togglePerMonth() {
+        setActiveSection(activeSection === "perMonth" ? null : "perMonth");
+    }
+
+    function togglePerWeek() {
+        setActiveSection(activeSection === "perWeek" ? null : "perWeek");
+    }
+
+  return (
+    <>
+    <h2>Tarkastele tuloja ja menoja vuosi, kuukausi ja viikkotasolla</h2>
+    <NavLink to="/">Takaisin</NavLink>
+    <br></br> <br></br>
+    <button className='general-button' onClick={togglePerYear}>Vuosi</button>
+    <button className='general-button' onClick={togglePerMonth}>Kuukausi</button>
+    <button className='general-button' onClick={togglePerWeek}>Viikko</button>
+    <br></br> <br></br>
+    {activeSection === "perYear" && <ShowPerYear key="perYear" />}
+    {activeSection === "perMonth" && <ShowPerMonth key="perMonth" />}
+    {activeSection === "perWeek" && <ShowPerWeek key="perWeek" />}
+    </>
+  );
+}
+
+export default Analytics;
+

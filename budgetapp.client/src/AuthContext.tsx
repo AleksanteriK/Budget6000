@@ -8,6 +8,7 @@ type User = {
   salary: number;
   housingAllowance: number;
   studyAllowance: number;
+  studyAllowanceMonths: number;
   otherIncome: number[];
   rent: number;
   mortage: number;

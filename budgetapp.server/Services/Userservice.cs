@@ -8,7 +8,7 @@ public class Userservice
 {
     public IMongoCollection<User> _userCollection;
 
-    public Userservice (IOptions<BudgetAppDatabaseSettings> settings)
+    public Userservice(IOptions<BudgetAppDatabaseSettings> settings)
     {
         var mongoClient = new MongoClient(settings.Value.ConnectionString);
         var _database = mongoClient.GetDatabase(settings.Value.DatabaseName);
@@ -21,14 +21,21 @@ public class Userservice
 
     public async Task PostUserAsync(User newUser) =>
         await _userCollection.InsertOneAsync(newUser);
-    
+
     public async Task UpdateUserDataAsync(string id, User modifiedUser) =>
         await _userCollection.ReplaceOneAsync(user => user.Id == id, modifiedUser);
+
+    public async Task<UpdateResult> UpdateUserPasswordAsync(string userId, UpdateDefinition<User> update)
+    {
+        return await _userCollection.UpdateOneAsync(
+            u => u.Id == userId,
+            update
+        );
+    }
 
     public async Task<bool> DeleteUserAsync(string userId)
     {
         var result = await _userCollection.DeleteOneAsync(user => user.Id == userId);
-
         return result.DeletedCount > 0;
     }
 

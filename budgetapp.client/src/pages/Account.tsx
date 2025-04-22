@@ -53,6 +53,11 @@ function Account() {
         {() => (
           <Form className="form-group">
             <br/>
+            <br/>
+            <label htmlFor="firstname">Käyttäjätunnus</label>
+            <h3>{user.username}</h3>
+            <br/>
+            <br/>
             <label htmlFor="firstname">Etunimi</label>
             <Field name="firstname" type="text" placeholder="Etunimi" />
             <br/>
@@ -67,7 +72,7 @@ function Account() {
             <br/>
             <label htmlFor="phone">Puhelinnumero</label>
             <Field name="phone" type="text" placeholder="Puhelin" />
-            <button type="submit">Tallenna</button>
+            <button className='general-button' type="submit">Tallenna</button>
           </Form>
         )}
       </Formik>
