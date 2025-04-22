@@ -106,30 +106,98 @@ function Analytics() {
     }
 
     const ShowPerMonth = () => {
+        let totalOtherIncome = 0;
+
+        if (user.otherIncome && Array.isArray(user.otherIncome)) {
+            for (let i = 0; i < user.otherIncome.length; i++) {
+            totalOtherIncome += user.otherIncome[i] / 12;
+            }
+        }
+
+        let totalOtherExpenses = 0;
+
+        if (user.otherExpenses && Array.isArray(user.otherExpenses)) {
+            for (let j = 0; j < user.otherExpenses.length; j++) {
+            totalOtherExpenses += user.otherExpenses[j] / 12;
+            }
+        }
+
+        const monthlyIncome = (user.salary ?? 0) / 12 + 
+                              (user.studyAllowance ?? 0) + 
+                              (totalOtherIncome ?? 0);
+
+        const monthlyExpenses = (user.rent ?? 0) / 12+ 
+                                (user.food ?? 0) / 12+ 
+                                (user.electricityBill ?? 0) / 12 + 
+                                (user.mortage ?? 0) / 12 + 
+                                (totalOtherExpenses ?? 0);
+
         return (
-            <Card>
-                <Card.Body>
-                <Card.Title>{}</Card.Title>
-                <Row>
-                    <Col>Tulot  € </Col>
-                    <Col>Menot  € </Col>
-                </Row>
-                </Card.Body>
-            </Card>
+            <>
+                <Card className='analytics-card'>
+                    <Card.Body>
+                        <Card.Title>Kuukausi</Card.Title>
+                        <br></br>
+                        <Row>
+                            <Col>
+                                Tulot kuukausitasolla <span className='analytics-card-income'>{monthlyIncome.toFixed(2)} €</span>
+                            </Col>
+                            <br></br>
+                            <Col>
+                                Menot Kuukausitasolla <span className='analytics-card-expenses'>{monthlyExpenses.toFixed(2)} €</span>
+                            </Col>
+                        </Row>
+                    </Card.Body>
+                </Card>
+            </>
         );
     }
 
     const ShowPerWeek = () => {
+        let totalOtherIncome = 0;
+
+        if (user.otherIncome && Array.isArray(user.otherIncome)) {
+            for (let i = 0; i < user.otherIncome.length; i++) {
+                totalOtherIncome += user.otherIncome[i] / 52;
+            }
+        }
+
+        let totalOtherExpenses = 0;
+
+        if (user.otherExpenses && Array.isArray(user.otherExpenses)) {
+            for (let j = 0; j < user.otherExpenses.length; j++) {
+                totalOtherExpenses += user.otherExpenses[j] / 52;
+            }
+        }
+
+        const weeklyIncome = (user.salary ?? 0) / 52 + 
+                             (user.studyAllowance ?? 0) / 4 + 
+                             (totalOtherIncome ?? 0);
+
+        const weeklyExpenses = (user.rent ?? 0) / 52 + 
+                               (user.food ?? 0) / 52 + 
+                               (user.electricityBill ?? 0) / 52 + 
+                               (user.mortage ?? 0) / 52 + 
+                               (totalOtherExpenses ?? 0);
+
         return (
-            <Card>
-                <Card.Body>
-                <Card.Title>{}</Card.Title>
-                <Row>
-                    <Col>Tulot  € </Col>
-                    <Col>Menot  € </Col>
-                </Row>
-                </Card.Body>
-            </Card>
+            <>
+                <Card className='analytics-card'>
+                    <Card.Body>
+                        <Card.Title>Viikko</Card.Title>
+                        <br></br>
+                        <Row>
+                            <Col>
+                                Tulot viikkotasolla <span className='analytics-card-income'>{weeklyIncome.toFixed(2)} €</span>
+                            </Col>
+                            <br></br>
+                            <Col>
+                                Menot viikkotasolla <span className='analytics-card-expenses'>{weeklyExpenses.toFixed(2)} €</span>
+                            </Col>
+                        </Row>
+                    </Card.Body>
+                </Card>
+            </>
         );
     }
 
