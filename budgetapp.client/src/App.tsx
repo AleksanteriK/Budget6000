@@ -4,7 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import './App.css';
 import Navbar from './NavBar';
 import { useAuth } from './AuthContext';
-import { Login, Logout, Home, LoadingSpinner, Account, Signup, Analytics} from "./pages";
+import { Login, Logout, Home, LoadingSpinner, Account, Signup, Analytics, Privacy} from "./pages";
 
 // Define types for the PrivateRoute props
 interface PrivateRouteProps {
@@ -29,6 +29,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/privacy" element={<Privacy />} />
         <Route path="/logout" element={<Logout />} />
         <Route
           path="/"

@@ -14,7 +14,6 @@ function Logout() {
   return (
     <>
       <p>Kirjauduit ulos!</p>
-
       <NavLink to="/">Takaisin</NavLink>
     </>
   )

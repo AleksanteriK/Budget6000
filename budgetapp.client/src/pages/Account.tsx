@@ -137,7 +137,7 @@ function Account() {
               <Field name="phone" type="text" placeholder="Puhelin" />
               <button className='general-button' type="submit">Tallenna</button>
             </Form>
-
+            <h3>Vaihda salasana</h3>
             <Form className="form-group">
               <label htmlFor="oldPassword">Vanha salasana</label>
               <Field name="oldPassword" type="password" placeholder="Vanha salasana" />
@@ -170,6 +170,9 @@ function Account() {
           </>
         )}
       </Formik>
+      <br />
+      <br />
+      <NavLink to="/privacy">Tietosuojaseloste</NavLink>
     </>
   );
 }

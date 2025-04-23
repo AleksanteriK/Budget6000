@@ -14,6 +14,7 @@ function Signup() {
     lastname: any;
     email: any;
     phone: any;
+    terms: any;
   }) => {
     const username = values.username;
     const password = values.password;
@@ -21,10 +22,21 @@ function Signup() {
     const lastname = values.lastname;
     const email = values.email;
     const phone = values.phone;
+    const terms = values.terms;
 
     if(!username || !password || !firstname || !lastname || !email)
     {
         toast.error("Anna käyttäjätunnus, salasana, etu- ja sukunimi, sähköposti sekä puhelinnumero!");
+        return;
+    }
+
+    if (password.length < 8) {
+        toast.error("Salasanan pituuden tulee olla vähintään 8 merkkiä!");
+        return;
+    }
+
+    if (terms === false) {
+        toast.error("Sinun tulee hyväksyä tietosuojaseloste, ennen kuin voit luoda käyttäjän!");
         return;
     }
 
@@ -70,7 +82,8 @@ function Signup() {
             firstname: '',
             lastname: '',
             email: '',
-            phone: ''
+            phone: '',
+            terms: false
         }}
         onSubmit={handleSignup}
       >
@@ -100,6 +113,12 @@ function Signup() {
           <br/>
           <br/>
           <button type="submit" className="btn btn-primary">Luo käyttäjä</button>
+          <br/>
+          <br/>
+          <span>Hyväksyn <NavLink to="/privacy">tietosuojaselosteen</NavLink></span>
+          <label>
+          <Field id="terms" name="terms" type="checkbox" required />
+          </label>
         </Form>
       </Formik>
       <NavLink to="/">Takaisin</NavLink>
